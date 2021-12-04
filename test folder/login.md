@@ -10,7 +10,7 @@
 
 ### 2-1. 서비스 계정에 들어간 후 비공개 키를 생성 하여 C:\key\ 경로에 저장한다.
 
-![3](https://user-images.githubusercontent.com/75459370/144719103-3b0696a9-23ef-43d8-8b6d-dd0ddf12a285.JPG)
+![3](https://user-images.githubusercontent.com/75459370/144719249-e04ce447-dee3-41a6-9a1c-ae79d6026903.JPG)
 
 ## 나머지는 이미 저장된 코드로 사용 하면 될 듯.
 
