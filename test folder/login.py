@@ -1,0 +1,109 @@
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import auth
+from firebase_admin import db
+
+# firebase web app 생성 시 뜨는 정보 가져온 것
+firebaseConfig = {
+    "apiKey": "AIzaSyCtI3C9FLIBzAbvKbiqMMY98BUHIecdvww",
+    "authDomain": "test-login-82a6a.firebaseapp.com",
+    "databaseURL": "https://test-login-82a6a-default-rtdb.firebaseio.com",
+    "projectId": "test-login-82a6a",
+    "storageBucket": "test-login-82a6a.appspot.com",
+    "messagingSenderId": "916063757612",
+    "appId": "1:916063757612:web:40e99b9f92d1a173617889",
+    "measurementId": "G-WYBB3RF90Y"
+  }
+
+# 새 비공개 키 저장한 곳 ( 통일 합시다 )
+json_path = "C:/key/test-login-82a6a-firebase-adminsdk-zrrt9-b9a34d5b16.json"
+
+cred = credentials.Certificate(json_path)
+app = firebase_admin.initialize_app(cred, firebaseConfig)
+auth.Client(app=app)
+
+characters = "@."
+
+def sign_in(e, p, u):
+    print("Wait a moment\n")
+
+    u[0] = auth.get_user_by_email(email=e)
+    print(u[0].uid)
+    if u[0].uid != e:
+        print('not user')
+        return -1
+
+    dbid = ''.join(x for x in e if x not in characters)
+
+    result = db.reference(dbid).get()
+
+    if e == result['Email']:
+        if p == result['Password']:
+            return 1
+
+    #u[0] = auth.get_user_by_email(email=e)
+
+    return 0
+
+def sign_up(e, p, u):
+    print("Wait a moment\n")
+
+    u[0] = auth.create_user(uid= e, email=e, password=p)
+    link = auth.generate_email_verification_link(email, action_code_settings=None)
+
+    print(link)
+
+    return 1
+
+if __name__ == "__main__":
+    print("1. Sing in")
+    print("2. Sing up")
+    print("3. Forgot Password")
+
+    choice = int(input("Input: "))
+    print()
+
+    user = [0]
+
+    if choice == 1:
+        print("Sing in")
+
+        while True:
+            email = input("Email: ")
+            pw = input("Password: ")
+
+            if sign_in(email, pw, user) == 1:
+                break
+
+        print("Successfully signed in to TossSync!")
+
+    elif choice == 2:
+        print("Sing up")
+
+        while True:
+            email = input("Email: ")
+            pw = input("Password: ")
+
+            if sign_up(email, pw, user) == 1:
+                data = {
+                    'Email': email,
+                    'Password': pw
+                }
+                dbid = ''.join(x for x in email if x not in characters)
+                dir = db.reference(dbid)
+                dir.update(data)
+                
+                break
+
+        print("Successfully signed up to TossSync!: " + user[0].uid)
+
+    # elif choice == 3:
+    #     print("Forgot password")
+
+    #     while True:
+    #         email = input("Email: ")
+
+    #         if forgot_pw(email) == 1:
+    #             break
+
+    #     print("Password reset address has been sent by email.")
