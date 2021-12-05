@@ -5,18 +5,18 @@ from firebase_admin import db
 
 # firebase web app 생성 시 뜨는 정보 가져온 것
 firebaseConfig = {
-    "apiKey": "AIzaSyCtI3C9FLIBzAbvKbiqMMY98BUHIecdvww",
-    "authDomain": "test-login-82a6a.firebaseapp.com",
-    "databaseURL": "https://test-login-82a6a-default-rtdb.firebaseio.com",
-    "projectId": "test-login-82a6a",
-    "storageBucket": "test-login-82a6a.appspot.com",
-    "messagingSenderId": "916063757612",
-    "appId": "1:916063757612:web:40e99b9f92d1a173617889",
-    "measurementId": "G-WYBB3RF90Y"
+    'apiKey': "AIzaSyCpvL3pI1qTqMoQZpKZBnkgCGECpO90nnI",
+    'authDomain': "cims-app-42e25.firebaseapp.com",
+    "databaseURL": "https://cims-app-42e25-default-rtdb.firebaseio.com/",
+    'projectId': "cims-app-42e25",
+    'storageBucket': "cims-app-42e25.appspot.com",
+    'messagingSenderId': "667947485921",
+    'appId': "1:667947485921:web:8575057fd579c3ba3485a0",
+    'measurementId': "G-BDVQW2R5PY"
   }
 
 # 새 비공개 키 저장한 곳 ( 통일 합시다 )
-json_path = "C:/key/test-login-82a6a-firebase-adminsdk-zrrt9-b9a34d5b16.json"
+json_path = "C:/key/cims-app-42e25-firebase-adminsdk-liwv5-01f0787b04.json"
 
 cred = credentials.Certificate(json_path)
 app = firebase_admin.initialize_app(cred, firebaseConfig)
@@ -37,7 +37,7 @@ def sign_in(e, p, u):
 
     dbid = ''.join(x for x in e if x not in characters)
 
-    result = db.reference(dbid).get()
+    result = db.reference('Users/' + dbid).get()
 
     if e == result['Email']:
         if p == result['Password']:
@@ -92,7 +92,7 @@ if __name__ == "__main__":
                     'Password': pw
                 }
                 dbid = ''.join(x for x in email if x not in characters)
-                dir = db.reference(dbid)
+                dir = db.reference('Users/' + dbid)
                 dir.update(data)
                 
                 break
