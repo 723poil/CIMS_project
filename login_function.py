@@ -24,10 +24,10 @@ auth.Client(app=app)
 
 characters = "@."
 
-def sign_in(email, password, user):
+def sign_in(email, password):
     
     try:
-        user = auth.get_user_by_email(email=email)
+        auth.get_user_by_email(email=email)
     except firebase_admin._auth_utils.UserNotFoundError as e:
         print('not user')
         return -1
@@ -37,17 +37,16 @@ def sign_in(email, password, user):
     result = db.reference('Users/Manager/' + db_user_id).get()
 
     if result != None and email == result['Email'] and password == result['Password']:
-        user = Manager.Manager(result)
-        return user # 관리자 로그인
+        return 1 # 관리자 로그인
     else:
         result = db.reference('Users/Member/' + db_user_id).get()
 
         if result != None and email == result['Email'] and password == result['Password']:
-            user = Member.Member(result)
-            return user # 회원 로그인
+            return 2 # 회원 로그인
     
-    # 관리자와 회원 return 부분은 바꾸어야 할듯
-    # return 값으로 구분하여 Manager와 Member 생성자를 만들어야 할듯
+    # return 값으로 구분하여 Manager와 Member 생성자를 만들어야 할듯 (밑에 예시)
+    # user = Manager.Manager(user_data))
+    # user = Member.Member(user_data)
 
     return -1 # 등록되지 않은 아이디 및 비밀번호
 
@@ -64,7 +63,7 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
 
     user = auth.create_user(uid = registration_info['Email'], email=registration_info['Email'], password=registration_info['Password'])
     
-    if user == None:
+    if user is None:
         return -1
     
     link = auth.generate_email_verification_link(user.email, action_code_settings=None)
@@ -88,8 +87,10 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
 
     check_user_data = db.reference('Users/Member' + db_user_id).get()
 
-    for c, u in check_user_data, user_data:
-        if c != u:
+    # 사용자 등록은 정상적으로 되었지만, 데이터베이스에 정보가 제대로 안들어갔을 경우
+    # 등록된 정보를 제거 한 후 다시 회원가입 하도록 유도
+    for check_ud, ud in zip(check_user_data, user_data):
+        if check_ud != ud:
             print('sign up failed')
             auth.delete_user(uid=registration_info['Email'])
             return -1
