@@ -16,7 +16,7 @@ firebaseConfig = {
   }
 
 # 새 비공개 키 저장한 곳 ( 통일 합시다 )
-json_path = "C:/key/cims-app-42e25-firebase-adminsdk-liwv5-01f0787b04.json"
+json_path = "C:/key/cims-app-42e25-firebase-adminsdk-liwv5.json"
 
 cred = credentials.Certificate(json_path)
 app = firebase_admin.initialize_app(cred, firebaseConfig)
