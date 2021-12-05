@@ -1,5 +1,7 @@
 # CIMS_project
-COVID19 information management system (CIMS)
++ COVID19 information management system (CIMS)
+
+---------------------------------------
 
 ## member
  + 박지운
@@ -7,7 +9,20 @@ COVID19 information management system (CIMS)
  + 이상협
  + 황윤호
 
-## pyrebase 사용 x -> token 사용 x -> FCM 기능 사용 불가
+## 회의
+ + 12-05
+ 
+   - 개발 방향 결정
+   - 역발 배분
+   - 다음 회의 시간 조율
+ 
+ + 12-08
+ 
+   - 
+
+## 문제점과 해결책
+
+### 1. pyrebase 사용 x -> token 사용 x -> FCM 기능 사용 불가
  + 관리자가 알림을 추가 하면 ( read : False 내용 같이 넣어서 )
  + 전체 사용자에게 전달 시
  
@@ -20,13 +35,6 @@ COVID19 information management system (CIMS)
    - read : False 일 경우 알림 게시
    - read : True 일 경우 무시
 
-## 회의
- + 12-05
- 
-   - 개발 방향 결정
-   - 역발 배분
-   - 다음 회의 시간 조율
- 
- + 12-08
- 
-   - 
+### 2. 자바 상에서의 패키지 개념을 어떻게 파이썬에서 표현 할 것인가?
++ 폴더로 나누어서 표현
+   - from 폴더이름 import 파일이름 으로 실행
