@@ -51,6 +51,7 @@ def sign_up(e, p, u):
     print("Wait a moment\n")
 
     u[0] = auth.create_user(uid= e, email=e, password=p)
+    print(u[0].email)
     link = auth.generate_email_verification_link(email, action_code_settings=None)
 
     print(link)
