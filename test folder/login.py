@@ -27,11 +27,13 @@ characters = "@."
 def sign_in(e, p, u):
     print("Wait a moment\n")
 
-    u[0] = auth.get_user_by_email(email=e)
-    print(u[0].uid)
-    if u[0].uid != e:
+    try:
+        u[0] = auth.get_user_by_email(email=e)
+    except firebase_admin._auth_utils.UserNotFoundError as e:
         print('not user')
         return -1
+        
+    print(u[0].uid)
 
     dbid = ''.join(x for x in e if x not in characters)
 
@@ -43,7 +45,7 @@ def sign_in(e, p, u):
 
     #u[0] = auth.get_user_by_email(email=e)
 
-    return 0
+    return -1
 
 def sign_up(e, p, u):
     print("Wait a moment\n")
