@@ -74,7 +74,6 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
         'Birth' : registration_info['Birth'],
         'Address' : registration_info['Address'],
         'Job' : registration_info['Job'],
-        'Resident registration number' : registration_info['Resident registration number'],
         'Phone number' : registration_info['Phone number'],
     }
 
