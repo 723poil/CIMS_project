@@ -2,8 +2,6 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import auth
 from firebase_admin import db
-import Manager
-import Member
 
 firebaseConfig = {
     'apiKey': "AIzaSyCpvL3pI1qTqMoQZpKZBnkgCGECpO90nnI",
@@ -96,6 +94,12 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
             return -1
     
     return 1
+
+def search_Id():
+    pass
+
+def search_Password():
+    pass
 
 # 비밀번호 찾기, 아이디 찾기 기능 추가 예정
 # 클래스 다이어그램 상의 관리자 리스트와 회원 리스트 클래스들은 데이터베이스로 대체
