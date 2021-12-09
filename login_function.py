@@ -79,15 +79,15 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
 
     db_user_id = ''.join(x for x in registration_info['Email'] if x not in characters)
     
-    user_dir = db.reference('Users/Member/' + db_user_id)
+    user_dir = db.reference('User-package/Users/' + db_user_id)
     user_dir.update(user_data)
 
-    check_user_data = db.reference('Users/Member' + db_user_id).get()
+    check_user_data = db.reference('User-package/Users/' + db_user_id).get()
 
     # 사용자 등록은 정상적으로 되었지만, 데이터베이스에 정보가 제대로 안들어갔을 경우
     # 등록된 정보를 제거 한 후 다시 회원가입 하도록 유도
     for check_ud, ud in zip(check_user_data, user_data):
-        if check_ud != ud:
+        if check_ud != 'user_notifications' and check_ud != ud:
             print('sign up failed')
             auth.delete_user(uid=registration_info['Email'])
             return -1
