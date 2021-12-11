@@ -27,7 +27,8 @@ class report:
         self.user = user
 
     def reportit():
-        dir = db.refrence("Report-package/report/" + user)
+        dbid = ''.join(x for x in self.user if x not in characters)
+        dir = db.refrence("Report-package/report/" + dbid)
         dir.update({'contet' : self.content,
                     'date' : self.date,
                     'user' : self.user})
