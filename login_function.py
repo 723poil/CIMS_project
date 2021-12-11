@@ -74,7 +74,7 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
     # 사용자 등록은 정상적으로 되었지만, 데이터베이스에 정보가 제대로 안들어갔을 경우
     # 등록된 정보를 제거 한 후 다시 회원가입 하도록 유도
     for check_ud, ud in zip(check_user_data, user_data):
-        if check_ud != 'user_notifications' and check_ud != ud:
+        if check_ud != 'user_notifications' and check_user_data[check_ud] != user_data[ud]:
             print('sign up failed')
             fa.delete_user(uid=registration_info['Email'])
             return -1
