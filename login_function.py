@@ -19,7 +19,7 @@ def sign_in(email, password):
 
     db_user_id = ''.join(x for x in email if x not in characters)
 
-    result = db.reference('Users/Manager/' + db_user_id).get()
+    result = db.reference('User-package/Users/Member/' + db_user_id).get()
 
     if result != None and email == result['Email'] and password == result['Password']:
         return 1 # 관리자 로그인

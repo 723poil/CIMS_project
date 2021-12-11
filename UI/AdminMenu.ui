@@ -79,31 +79,6 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>-10</y>
-      <width>560</width>
-      <height>611</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="toolTipDuration">
-     <number>0</number>
-    </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="midLineWidth">
-     <number>-3</number>
-    </property>
-   </widget>
    <widget class="QPushButton" name="ReportList">
     <property name="geometry">
      <rect>

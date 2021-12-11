@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_TotalInfoWindow(object):
     def setupUi(self, TotalInfoWindow):
         TotalInfoWindow.setObjectName("TotalInfoWindow")
-        TotalInfoWindow.resize(964, 900)
+        TotalInfoWindow.resize(964, 914)
         TotalInfoWindow.setIconSize(QtCore.QSize(16, 16))
         self.centralwidget = QtWidgets.QWidget(TotalInfoWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -30,9 +30,6 @@ class Ui_TotalInfoWindow(object):
         self.Infected_personInfo = QtWidgets.QPushButton(self.centralwidget)
         self.Infected_personInfo.setGeometry(QtCore.QRect(740, 10, 211, 131))
         self.Infected_personInfo.setObjectName("Infected_personInfo")
-        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(20, 160, 761, 711))
-        self.listWidget.setObjectName("listWidget")
         self.listWidget_2 = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget_2.setGeometry(QtCore.QRect(790, 160, 161, 711))
         self.listWidget_2.setObjectName("listWidget_2")
@@ -43,6 +40,12 @@ class Ui_TotalInfoWindow(object):
         self.alarmtext.setGeometry(QtCore.QRect(770, 880, 91, 20))
         self.alarmtext.setText("")
         self.alarmtext.setObjectName("alarmtext")
+        self.Back = QtWidgets.QPushButton(self.centralwidget)
+        self.Back.setGeometry(QtCore.QRect(30, 880, 81, 31))
+        self.Back.setObjectName("Back")
+        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
+        self.listWidget.setGeometry(QtCore.QRect(25, 161, 741, 711))
+        self.listWidget.setObjectName("listWidget")
         TotalInfoWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(TotalInfoWindow)
@@ -56,3 +59,4 @@ class Ui_TotalInfoWindow(object):
         self.EventInfo.setText(_translate("TotalInfoWindow", "비대면 행사"))
         self.Infected_personInfo.setText(_translate("TotalInfoWindow", "확진자"))
         self.alarmbutton.setText(_translate("TotalInfoWindow", "알림"))
+        self.Back.setText(_translate("TotalInfoWindow", "Back"))

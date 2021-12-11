@@ -46,14 +46,6 @@ class Ui_UserMenu(object):
         self.line_4.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_4.setObjectName("line_4")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 0, 560, 611))
-        self.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.label.setToolTipDuration(0)
-        self.label.setAutoFillBackground(True)
-        self.label.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.label.setMidLineWidth(-3)
-        self.label.setObjectName("label")
         UserMenu.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(UserMenu)
@@ -65,4 +57,3 @@ class Ui_UserMenu(object):
         self.DisplayInfo.setText(_translate("UserMenu", "DisplayInfo"))
         self.SearchVisitPlace.setText(_translate("UserMenu", "Search Visit Place"))
         self.SearchImpactedPlace.setText(_translate("UserMenu", "Search Impacted Place"))
-import resources_rc
