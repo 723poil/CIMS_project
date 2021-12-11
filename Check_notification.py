@@ -10,10 +10,11 @@ fa = firebase_application.start()
 
 characters = "@."
 
-def thread_run(uid):
+def thread_run(args):
+    # args = [uid, notilist]
     # 1. 개인 알림 확인 과 공통 알림 확인 코드 작성
     #1. 개인 알림 확인
-    db_user_id = ''.join(x for x in uid if x not in characters)
+    db_user_id = ''.join(x for x in args[0] if x not in characters)
 
     user_noti = db.reference('User-package/Users/' + db_user_id + '/user_notifications/').get()
 
@@ -34,6 +35,6 @@ def thread_run(uid):
         print('공통 알림 추가')
 
     # 간격 일단 1분마다 설정
-    threading.Timer(60, thread_run, [uid]).start()
+    threading.Timer(60, thread_run, args).start()
 
 thread_run('leetkdguq73@naver.com')
