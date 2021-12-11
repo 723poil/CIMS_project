@@ -1,9 +1,0 @@
-class Manager_list:
-    def __init__(self, Manager):
-        self.Manager = Manager
-
-    def Check_User_id(email, passord):
-         if Manager != None and Manager == User['Email'] and Manager == User['Password']:
-            return 2 # 회원 로그인
-         else
-            return -1
