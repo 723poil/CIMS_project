@@ -10,5 +10,4 @@ class Member(User.User):
         self.birth = user_data['Birth']
         self.address = user_data['Address']
         self.job = user_data['Job']
-        self.resident_registration_number = user_data['Resident registration number']
         self.phone_number = user_data['Phone number']        
