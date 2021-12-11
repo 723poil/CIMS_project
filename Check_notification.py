@@ -20,6 +20,7 @@ def thread_run(uid):
     for i in user_noti:
         if user_noti[i]['isinlist'] == 'no':
             # 알림 창에 추가
+            # 추가 후 isinlist 값 변경
             print('개인 알림 추가')
     
     #2. 공통 알림 확인
@@ -29,9 +30,10 @@ def thread_run(uid):
 
     if public_noti['noti_count'] != user_noti_count:
         # 알림 창에 추가
+        # 추가 후 user_noti_count 변경
         print('공통 알림 추가')
 
     # 간격 일단 1분마다 설정
-    threading.Timer(60, thread_run).start()
+    threading.Timer(60, thread_run, [uid]).start()
 
 thread_run('leetkdguq73@naver.com')
