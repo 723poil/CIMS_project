@@ -19,16 +19,16 @@ auth.Client(app=app)
 
 characters = "@."
 
-dir = db.refrence("Report-package/report/")
 class report:
     
     def __init__(self, content, date, user):
-        self.content = contet
+        self.content = content
         self.date = date
         self.user = user
 
     def reportit():
-        dir.update({'contet' : self.contet,
+        dir = db.refrence("Report-package/report/" + user)
+        dir.update({'contet' : self.content,
                     'date' : self.date,
                     'user' : self.user})
         
