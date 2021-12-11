@@ -192,7 +192,7 @@
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="CancelButton">
+  <widget class="QPushButton" name="CancleButton">
    <property name="geometry">
     <rect>
      <x>520</x>
