@@ -1,31 +1,18 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+import firebase_application
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import auth
 from firebase_admin import db
 
-firebaseConfig = {
-    'apiKey': "AIzaSyCpvL3pI1qTqMoQZpKZBnkgCGECpO90nnI",
-    'authDomain': "cims-app-42e25.firebaseapp.com",
-    "databaseURL": "https://cims-app-42e25-default-rtdb.firebaseio.com/",
-    'projectId': "cims-app-42e25",
-    'storageBucket': "cims-app-42e25.appspot.com",
-    'messagingSenderId': "667947485921",
-    'appId': "1:667947485921:web:8575057fd579c3ba3485a0",
-    'measurementId': "G-BDVQW2R5PY"
-  }
-
-json_path = "C:/key/cims-app-42e25-firebase-adminsdk-liwv5.json"
-
-cred = credentials.Certificate(json_path)
-app = firebase_admin.initialize_app(cred, firebaseConfig)
-auth.Client(app=app)
+fa = firebase_application.start()
 
 characters = "@."
 
 def sign_in(email, password):
     
     try:
-        auth.get_user_by_email(email=email)
+        fa.get_user_by_email(email=email)
     except firebase_admin._auth_utils.UserNotFoundError as e:
         print('not user')
         return -1
@@ -59,12 +46,12 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
     # }
     # 형식으로 가져와서 수행한다.
 
-    user = auth.create_user(uid = registration_info['Email'], email=registration_info['Email'], password=registration_info['Password'])
+    user = fa.create_user(uid = registration_info['Email'], email=registration_info['Email'], password=registration_info['Password'])
     
     if user is None:
         return -1
     
-    link = auth.generate_email_verification_link(user.email, action_code_settings=None)
+    link = fa.generate_email_verification_link(user.email, action_code_settings=None)
     print(link) # link 들어가서 이메일 검증하는 단계 만들기
 
     user_data = {
@@ -89,7 +76,7 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
     for check_ud, ud in zip(check_user_data, user_data):
         if check_ud != 'user_notifications' and check_ud != ud:
             print('sign up failed')
-            auth.delete_user(uid=registration_info['Email'])
+            fa.delete_user(uid=registration_info['Email'])
             return -1
     
     return 1
