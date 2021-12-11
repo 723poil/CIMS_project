@@ -1,4 +1,3 @@
-import Manager
 
 class Manager_list:
     def __init__(self):
@@ -9,7 +8,6 @@ class Manager_list:
             if self.manager_lsit[i] != None and email == self.manager_lsit[i].email and password == self.manager_lsit[i].password:
                 return 2 # 회원 로그인
             else
-                return -1
 
     def insert_manager(Manager):
         self.manager_list.append(Manager)

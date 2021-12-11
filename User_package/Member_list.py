@@ -1,4 +1,3 @@
-import Memeber
 
 class Member_list:
     def __init__(self):
