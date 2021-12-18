@@ -4,8 +4,6 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import firebase_application
 from firebase_admin import db
 
-fa = firebase_application.start()
-
 characters = "@."
 
 class report:

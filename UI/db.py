@@ -12,14 +12,18 @@ import Place_package.Covid_pcr_place as cpp
 import Place_package.Infected_person_visit_place as Ipvp
 import Place_package.Pcr_place_list as Ppl
 import Place_package.visit_place_list as Vpl
+import Report_package.Report_list as Rl
+import User_package.notification_list as nl
 
 import firebase_application
 
 COVID_dir = db.reference('COVID-package/')
 PLACE_dir = db.reference('Place-package/')
+REPORT_dir = db.reference('Report-package/')
 
 COVID_dt = COVID_dir.get()
 PLACE_dt = PLACE_dir.get()
+REPORT_dt = REPORT_dir.get()
 
 def get_corona():
     return Corona.Corona(COVID_dt['COVID-19'])
@@ -34,4 +38,10 @@ def get_news():
     return News.News(COVID_dt['News'])
 
 def get_vaccine():
-    return Vaccine.Vaccin(COVID_dt['Vaccine'])
+    vaccine =dict()
+    for i in COVID_dt['Vaccine']:
+        vaccine.update({i : Vaccine.Vaccine(COVID_dt['Vaccine'][i])})
+    return vaccine
+
+def get_event():
+    return Event.Event(COVID_dt['event'])

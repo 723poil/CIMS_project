@@ -1,8 +1,6 @@
 import firebase_application
 from firebase_admin import db
 
-fa = firebase_application.start()
-
 class noti:
     def __init__(self):
         self.notification_list = []

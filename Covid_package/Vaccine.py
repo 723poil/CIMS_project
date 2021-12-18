@@ -1,5 +1,5 @@
 
-class Vaccin:
+class Vaccine:
     def __init__ (self, Vaccine):
      self.name = Vaccine["name"]
      self.company = Vaccine["company"]
