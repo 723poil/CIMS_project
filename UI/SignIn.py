@@ -9,18 +9,18 @@ from PyQt5 import QtWidgets
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-SignInWindow = uic.loadUiType("UI\\SignIn.ui")[0]
-SignUpWindow = uic.loadUiType("UI\\SignUp.ui")[0]
-UserMenuWindow = uic.loadUiType("UI\\UserMenu.ui")[0]
-AdminMenuWindow = uic.loadUiType("UI\\AdminMenu.ui")[0]
-TotalInfoWindow = uic.loadUiType("UI\\TotalInfoWindow.ui")[0]
-form_reportlist = uic.loadUiType("UI/Report_List.ui")[0]
-form_reportcheck = uic.loadUiType("UI\\Reportcheck.ui")[0]
-form_report = uic.loadUiType("UI\\Report.ui")[0]
-form_viewinformation = uic.loadUiType("UI\\ViewInformation.ui")[0]
-form_impactedlist = uic.loadUiType("UI\\Impacted_List.ui")[0]
-form_visitplacelist = uic.loadUiType("UI\\VisitPlace_List.ui")[0]
-form_alarmlist = uic.loadUiType("UI\\Alarm_List.ui")[0]
+SignInWindow = uic.loadUiType("SignIn.ui")[0]
+SignUpWindow = uic.loadUiType("SignUp.ui")[0]
+UserMenuWindow = uic.loadUiType("UserMenu.ui")[0]
+AdminMenuWindow = uic.loadUiType("AdminMenu.ui")[0]
+TotalInfoWindow = uic.loadUiType("TotalInfoWindow.ui")[0]
+form_reportlist = uic.loadUiType("Report_List.ui")[0]
+form_reportcheck = uic.loadUiType("Reportcheck.ui")[0]
+form_report = uic.loadUiType("Report.ui")[0]
+form_viewinformation = uic.loadUiType("ViewInformation.ui")[0]
+form_impactedlist = uic.loadUiType("Impacted_List.ui")[0]
+form_visitplacelist = uic.loadUiType("VisitPlace_List.ui")[0]
+form_alarmlist = uic.loadUiType("Alarm_List.ui")[0]
 
 class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
@@ -28,7 +28,11 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.setupUi(self)
         self.Back.clicked.connect(self.ClickedBackButton)
         self.alarmbutton.clicked.connect(self.AlarmButtonFunction)
-        self.listWidget.itemDoubleClicked.connect(self.ViewInfoOpen)
+        self.VaccineInfo.clicked.connect(self.VaccineInfoButtonFunction)
+        self.CorronaInfo.clicked.connect(self.CorronaInfoButtonFunction)
+        self.EventInfo.clicked.connect(self.EventInfoButtonFunction)
+        self.Infected_personInfo.clicked.connect(self.Infected_personInfoButtonFunction)
+
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -37,11 +41,53 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
 
     def AlarmButtonFunction(self) :
         myalarm.show()
+        
+    def VaccineInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("모더나")
+        self.smallMenuList.addItem("화이자")
+        self.smallMenuList.itemClicked.connect(self.SetMainList)
 
-        #더블 클릭 했을 때 함수
-    def ViewInfoOpen(self) :
+    def CorronaInfoButtonFunction(self) : 
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("코로나")
+
+    def EventInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("경기도")
+        self.smallMenuList.addItem("강원도")
+        self.smallMenuList.addItem("충청도")
+        self.smallMenuList.addItem("경상도")
+        self.smallMenuList.addItem("전라도")
+        self.smallMenuList.addItem("제주도")
+
+    def Infected_personInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("확진자 수")
+        self.smallMenuList.addItem("확진자 상세정보")
+
+    def SetMainList(self) :
+        select = self.smallMenuList.currentItem().text()
+        self.MainMenuList.clear()
+
+        if select == "모더나" :
+            self.MainMenuList.addItem("모더나 정보")
+            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+        elif select == "화이자" :
+            self.MainMenuList.addItem("화이자 정보")
+            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+
+    def ViewInfo(self) :
+        myViewInformation.setup()
         myViewInformation.show()
+        
 
+    def getMainMenuListClickedInfo(self) :
+        return self.MainMenuList.currentItem().text()
 class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
         super().__init__()
@@ -116,13 +162,13 @@ class SignInClass(QMainWindow, SignInWindow) :
         #if(login == -1):
         #    QMessageBox.about(self,'SignIn Fail','아이디나 비밀번호가 틀렸습니다.')
         #elif(login == 1):
-        #widget.setFixedHeight(615)
-        #widget.setFixedWidth(800)
-        #widget.setCurrentIndex(widget.currentIndex()+1)
-        #elif(login == 2):
         widget.setFixedHeight(615)
         widget.setFixedWidth(800)
-        widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        #elif(login == 2):
+        #widget.setFixedHeight(615)
+        #widget.setFixedWidth(800)
+        #widget.setCurrentIndex(widget.currentIndex()+2)
 
     def ClickedSignUpButton(self): 
         SignUpClass(self)  
@@ -135,6 +181,9 @@ class SignUpClass(QDialog, SignUpWindow) :
         self.show()
         self.OkButton.clicked.connect(self.ClickedOkButton)
         self.CancleButton.clicked.connect(self.ClickedCancleButton)
+        self.regionSelect.addItem("Daegu")
+        self.regionSelect.addItem("서울~서울")
+        self.regionSelect.addItem("아름다운 강산에~")
         
     def ClickedOkButton(self):
         email = self.EmailLine.text()
@@ -165,13 +214,26 @@ class ViewInformation(QMainWindow, form_viewinformation) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
-        
         #정보 열람의 버튼 함수
-        self.ReportButton.clicked.connect(self.ReportButtonFunction)
-        
+        self.ReportButton.clicked.connect(self.ReportButtonFunction)    
         #Report버튼 클릭 시 작동 함수
     def ReportButtonFunction(self) :
         myReport.show()
+
+    def setup(self) :
+
+        self.textBrowser.setAcceptRichText(True)
+        self.textBrowser.setOpenExternalLinks(True)
+
+        select = totalInfoWindow.getMainMenuListClickedInfo()
+
+        if select == "모더나 정보" :
+            self.textBrowser.setPlainText("test")
+        elif select == "화이자 정보" :
+            self.textBrowser.setPlainText("안녕하세요") 
+           
+
+
         
 class Report(QDialog, form_report) :
     def __init__(self) :
@@ -259,8 +321,8 @@ if __name__ == "__main__" :
     adminMenuWindow = AdminMenuClass()
     totalInfoWindow = TotalInfoClass() 
     AdmintotalInfoWindow = AdminTotalInfoClass() 
-
     myViewInformation = ViewInformation()
+
     myReport = Report()
     myVisitPlaceList = VisitPlaceList()
     myImpactedList = ImpactedList()

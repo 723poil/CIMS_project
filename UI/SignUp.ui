@@ -134,9 +134,9 @@
   <widget class="QLineEdit" name="AddressLine">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>340</x>
      <y>320</y>
-     <width>491</width>
+     <width>381</width>
      <height>31</height>
     </rect>
    </property>
@@ -312,6 +312,16 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="regionSelect">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>320</y>
+     <width>101</width>
+     <height>31</height>
+    </rect>
    </property>
   </widget>
  </widget>

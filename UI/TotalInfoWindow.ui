@@ -72,7 +72,7 @@
      <string>확진자</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget_2">
+   <widget class="QListWidget" name="smallMenuList">
     <property name="geometry">
      <rect>
       <x>790</x>
@@ -121,7 +121,7 @@
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="MainMenuList">
     <property name="geometry">
      <rect>
       <x>25</x>
