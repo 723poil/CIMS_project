@@ -3,9 +3,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 import firebase_application
 from firebase_admin import db
-import Infected_person_visit_place as vp
-
-fa = firebase_application.start()
+import Place_package.Infected_person_visit_place as vp
 
 class visit_list:
     def __init__(self, user_address):
@@ -30,8 +28,3 @@ class visit_list:
 
         for i in set_place:
             self.vl.append(vp.ipvp(set_place[i]))
-
-vll = visit_list('Daegu')
-
-for i in vll.vl:
-    print(i.visit_time + '\n' + i.address + '\n' + i.ischeck_contact_complete)

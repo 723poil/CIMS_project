@@ -3,9 +3,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 import firebase_application
 from firebase_admin import db
-import Covid_pcr_place as cp
-
-fa = firebase_application.start()
+import Place_package.Covid_pcr_place as cp
 
 class pcr_list:
     def __init__(self, user_address):
@@ -30,8 +28,3 @@ class pcr_list:
 
         for i in set_place:
             self.pl.append(cp.cpp(set_place[i]))
-
-pll = pcr_list('Daegu')
-
-for i in pll.pl:
-    print(i.time + '\n' + i.address)

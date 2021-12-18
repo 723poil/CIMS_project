@@ -57,8 +57,11 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def CorronaInfoButtonFunction(self) : 
         self.MainMenuList.clear()
         self.smallMenuList.clear()
-        self.smallMenuList.addItem("")
-        self.smallMenuList.addItem("")
+        self.smallMenuList.addItem("정의")
+        self.smallMenuList.addItem("증상")
+        self.smallMenuList.addItem("검사 방법")
+        self.smallMenuList.addItem("자가 진단")
+        self.smallMenuList.addItem("행동 수칙")
 
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
@@ -86,6 +89,16 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         elif select == "화이자" :
             self.MainMenuList.addItem("화이자 정보")
             self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+        elif select == "정의":
+            self.MainMenuList.addItem(self.corona.definition)
+        elif select == "증상":
+            self.MainMenuList.addItem(self.corona.symptom)
+        elif select == "검사 방법":
+            self.MainMenuList.addItem(self.corona.how_test)
+        elif select == "자가 진단":
+            self.MainMenuList.addItem(self.corona.self_test)
+        elif select == "행동 수칙":
+            self.MainMenuList.addItem(self.corona.action_tip)
 
     def ViewInfo(self) :
         myViewInformation.setup(self)
