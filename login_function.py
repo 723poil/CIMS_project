@@ -39,10 +39,8 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
     # registration_info = {
     #   'Email' : '',
     #   'Password' : '',
+    #   'Name' : '',
     #   'Address' : '',
-    #   'Phone number' : '',
-    #   'Age' : '',
-    #   ...
     # }
     # 형식으로 가져와서 수행한다.
 
@@ -58,10 +56,7 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
         'Email' : registration_info['Email'],
         'Password' : registration_info['Password'],
         'Name' : registration_info['Name'],
-        'Birth' : registration_info['Birth'],
-        'Address' : registration_info['Address'],
-        'Job' : registration_info['Job'],
-        'Phone number' : registration_info['Phone number'],
+        'Address' : registration_info['Address']
     }
 
     db_user_id = ''.join(x for x in registration_info['Email'] if x not in characters)
