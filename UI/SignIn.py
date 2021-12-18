@@ -106,7 +106,7 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         widget.setCurrentIndex(widget.currentIndex()-2)
 
     def AlarmButtonFunction(self) :
-        print()
+        myalarm.show()
         
     def VaccineInfoButtonFunction(self) :
         self.MainMenuList.clear()
