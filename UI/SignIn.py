@@ -39,6 +39,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.corona = dbfile.get_corona()
         self.quarantine_measures = dbfile.get_distancing()
         self.vaccine = dbfile.get_vaccine()
+        self.coevent = dbfile.get_event()
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -67,18 +68,12 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
-        self.smallMenuList.addItem("경기도")
-        self.smallMenuList.addItem("강원도")
-        self.smallMenuList.addItem("충청도")
-        self.smallMenuList.addItem("경상도")
-        self.smallMenuList.addItem("전라도")
-        self.smallMenuList.addItem("제주도")
+        self.smallMenuList.addItem("인천광역시")
 
     def Infected_personInfoButtonFunction(self) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
         self.smallMenuList.addItem("확진자 수")
-        self.smallMenuList.addItem("확진자 상세정보")
 
     def SetMainList(self) :
         select = self.smallMenuList.currentItem().text()
@@ -109,7 +104,16 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
             self.MainMenuList.addItem(self.corona.action_tip)
         elif select == "방역 대책":
             self.MainMenuList.addItem("대구")
-            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+        elif select == "인천광역시":
+            for i in range(0, len(self.coevent['Incheon'])):
+                self.MainMenuList.addItem(
+                    "지역 : " + self.coevent['Incheon'][i].area + '\n\n' +
+                    "카테고리 : " + self.coevent['Incheon'][i].category + '\n\n' +
+                    "행사 이름 : " + self.coevent['Incheon'][i].name + '\n\n' +
+                    "내용 : " + self.coevent['Incheon'][i].information + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
+
 
     def ViewInfo(self) :
         myViewInformation.setup(self)
@@ -153,12 +157,7 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
-        self.smallMenuList.addItem("경기도")
-        self.smallMenuList.addItem("강원도")
-        self.smallMenuList.addItem("충청도")
-        self.smallMenuList.addItem("경상도")
-        self.smallMenuList.addItem("전라도")
-        self.smallMenuList.addItem("제주도")
+        self.smallMenuList.addItem("인천광역시")
 
     def Infected_personInfoButtonFunction(self) :
         self.MainMenuList.clear()

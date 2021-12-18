@@ -44,4 +44,12 @@ def get_vaccine():
     return vaccine
 
 def get_event():
-    return Event.Event(COVID_dt['event'])
+    event = dict()
+    for i in COVID_dt['event']:
+        a = []
+        for j in range(1, len(COVID_dt['event'][i])):
+            a.append(Event.Event(COVID_dt['event'][i][j]))
+            event.update({
+                i : a
+            })
+    return event
