@@ -6,21 +6,24 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtWidgets
+import db as dbfile
+
+userid = ''
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-SignInWindow = uic.loadUiType("SignIn.ui")[0]
-SignUpWindow = uic.loadUiType("SignUp.ui")[0]
-UserMenuWindow = uic.loadUiType("UserMenu.ui")[0]
-AdminMenuWindow = uic.loadUiType("AdminMenu.ui")[0]
-TotalInfoWindow = uic.loadUiType("TotalInfoWindow.ui")[0]
-form_reportlist = uic.loadUiType("Report_List.ui")[0]
-form_reportcheck = uic.loadUiType("Reportcheck.ui")[0]
-form_report = uic.loadUiType("Report.ui")[0]
-form_viewinformation = uic.loadUiType("ViewInformation.ui")[0]
-form_impactedlist = uic.loadUiType("Impacted_List.ui")[0]
-form_visitplacelist = uic.loadUiType("VisitPlace_List.ui")[0]
-form_alarmlist = uic.loadUiType("Alarm_List.ui")[0]
+SignInWindow = uic.loadUiType("C:/CIMS/UI/SignIn.ui")[0]
+SignUpWindow = uic.loadUiType("C:/CIMS/UI/SignUp.ui")[0]
+UserMenuWindow = uic.loadUiType("C:/CIMS/UI/UserMenu.ui")[0]
+AdminMenuWindow = uic.loadUiType("C:/CIMS/UI/AdminMenu.ui")[0]
+TotalInfoWindow = uic.loadUiType("C:/CIMS/UI/TotalInfoWindow.ui")[0]
+form_reportlist = uic.loadUiType("C:/CIMS/UI/Report_List.ui")[0]
+form_reportcheck = uic.loadUiType("C:/CIMS/UI/Reportcheck.ui")[0]
+form_report = uic.loadUiType("C:/CIMS/UI/Report.ui")[0]
+form_viewinformation = uic.loadUiType("C:/CIMS/UI/ViewInformation.ui")[0]
+form_impactedlist = uic.loadUiType("C:/CIMS/UI/Impacted_List.ui")[0]
+form_visitplacelist = uic.loadUiType("C:/CIMS/UI/VisitPlace_List.ui")[0]
+form_alarmlist = uic.loadUiType("C:/CIMS/UI/Alarm_List.ui")[0]
 
 class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
@@ -32,6 +35,8 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.CorronaInfo.clicked.connect(self.CorronaInfoButtonFunction)
         self.EventInfo.clicked.connect(self.EventInfoButtonFunction)
         self.Infected_personInfo.clicked.connect(self.Infected_personInfoButtonFunction)
+
+        self.corona = dbfile.get_corona()
 
 
     def ClickedBackButton(self):    
@@ -52,7 +57,8 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def CorronaInfoButtonFunction(self) : 
         self.MainMenuList.clear()
         self.smallMenuList.clear()
-        self.smallMenuList.addItem("코로나")
+        self.smallMenuList.addItem("")
+        self.smallMenuList.addItem("")
 
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
@@ -206,18 +212,21 @@ class SignInClass(QMainWindow, SignInWindow) :
             'Email' : email,
             'Password' : password,
         }
-        #로그인 기능
-        #login = login_function.sign_in(sign_info['Email'],sign_info['Password'])
-        #if(login == -1):
-        #    QMessageBox.about(self,'SignIn Fail','아이디나 비밀번호가 틀렸습니다.')
-        #elif(login == 1):
-        widget.setFixedHeight(615)
-        widget.setFixedWidth(800)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        #elif(login == 2):
-        #widget.setFixedHeight(615)
-        #widget.setFixedWidth(800)
-        #widget.setCurrentIndex(widget.currentIndex()+2)
+
+        userid = email
+
+        # 로그인 기능
+        login = login_function.sign_in(sign_info['Email'],sign_info['Password'])
+        if(login == -1):
+            QMessageBox.about(self,'SignIn Fail','아이디나 비밀번호가 틀렸습니다.')
+        elif(login == 2): # 회원로그인
+            widget.setFixedHeight(615)
+            widget.setFixedWidth(800)
+            widget.setCurrentIndex(widget.currentIndex()+1)
+        elif(login == 1): # 관리자로그인
+            widget.setFixedHeight(615)
+            widget.setFixedWidth(800)
+            widget.setCurrentIndex(widget.currentIndex()+2)
 
     def ClickedSignUpButton(self): 
         SignUpClass(self)  
@@ -231,29 +240,19 @@ class SignUpClass(QDialog, SignUpWindow) :
         self.OkButton.clicked.connect(self.ClickedOkButton)
         self.CancleButton.clicked.connect(self.ClickedCancleButton)
         self.regionSelect.addItem("Daegu")
-        self.regionSelect.addItem("서울~서울")
-        self.regionSelect.addItem("아름다운 강산에~")
         
     def ClickedOkButton(self):
         email = self.EmailLine.text()
         password = self.PasswordLine.text()
-        name = self.NameLine.text()
-        birth = self.BirthLine.text()
-        address = self.AddressLine.text()
-        job = self.JobLine.text()
-        RRN = self.RRNLine.text()
-        phone_number = self.PhoneLine.text()
+        address = self.regionSelect.currentText() + " " + self.AddressLine.text()
 
         registration_info = {
             'Email' : email,
             'Password' : password,
-            'Name' : name,
-            'Birth' : birth,
             'Address' : address,
-            'Job' : job,
-            'Phone number' : phone_number
         }
-        login_function.sign_up(registration_info)
+        if login_function.sign_up(registration_info) == 1:
+            self.close()
 
     def ClickedCancleButton(self):   
         self.close()
