@@ -82,7 +82,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
             self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
 
     def ViewInfo(self) :
-        myViewInformation.setup()
+        myViewInformation.setup(self)
         myViewInformation.show()
         
 
@@ -94,6 +94,10 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.setupUi(self)
         self.Back.clicked.connect(self.ClickedBackButton)
         self.alarmbutton.clicked.connect(self.AlarmButtonFunction)
+        self.VaccineInfo.clicked.connect(self.VaccineInfoButtonFunction)
+        self.CorronaInfo.clicked.connect(self.CorronaInfoButtonFunction)
+        self.EventInfo.clicked.connect(self.EventInfoButtonFunction)
+        self.Infected_personInfo.clicked.connect(self.Infected_personInfoButtonFunction)
         self.alarmbutton.setText("설정")
 
     def ClickedBackButton(self):    
@@ -103,7 +107,52 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
 
     def AlarmButtonFunction(self) :
         print()
+        
+    def VaccineInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("모더나")
+        self.smallMenuList.addItem("화이자")
+        self.smallMenuList.itemClicked.connect(self.SetMainList)
 
+    def CorronaInfoButtonFunction(self) : 
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("코로나")
+
+    def EventInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("경기도")
+        self.smallMenuList.addItem("강원도")
+        self.smallMenuList.addItem("충청도")
+        self.smallMenuList.addItem("경상도")
+        self.smallMenuList.addItem("전라도")
+        self.smallMenuList.addItem("제주도")
+
+    def Infected_personInfoButtonFunction(self) :
+        self.MainMenuList.clear()
+        self.smallMenuList.clear()
+        self.smallMenuList.addItem("확진자 수")
+        self.smallMenuList.addItem("확진자 상세정보")
+
+    def SetMainList(self) :
+        select = self.smallMenuList.currentItem().text()
+        self.MainMenuList.clear()
+
+        if select == "모더나" :
+            self.MainMenuList.addItem("모더나 정보")
+            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+        elif select == "화이자" :
+            self.MainMenuList.addItem("화이자 정보")
+            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+
+    def ViewInfo(self) :
+        myViewInformation.setup(self)
+        myViewInformation.show()
+        
+    def getMainMenuListClickedInfo(self) :
+        return self.MainMenuList.currentItem().text()
 
 class UserMenuClass(QMainWindow, UserMenuWindow) :
     def __init__(self) :
@@ -162,13 +211,13 @@ class SignInClass(QMainWindow, SignInWindow) :
         #if(login == -1):
         #    QMessageBox.about(self,'SignIn Fail','아이디나 비밀번호가 틀렸습니다.')
         #elif(login == 1):
+        # widget.setFixedHeight(615)
+        # widget.setFixedWidth(800)
+        # widget.setCurrentIndex(widget.currentIndex()+1)
+        #elif(login == 2):
         widget.setFixedHeight(615)
         widget.setFixedWidth(800)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-        #elif(login == 2):
-        #widget.setFixedHeight(615)
-        #widget.setFixedWidth(800)
-        #widget.setCurrentIndex(widget.currentIndex()+2)
+        widget.setCurrentIndex(widget.currentIndex()+2)
 
     def ClickedSignUpButton(self): 
         SignUpClass(self)  
@@ -220,12 +269,12 @@ class ViewInformation(QMainWindow, form_viewinformation) :
     def ReportButtonFunction(self) :
         myReport.show()
 
-    def setup(self) :
+    def setup(self,totalwindow) :
 
         self.textBrowser.setAcceptRichText(True)
         self.textBrowser.setOpenExternalLinks(True)
 
-        select = totalInfoWindow.getMainMenuListClickedInfo()
+        select = totalwindow.getMainMenuListClickedInfo()
 
         if select == "모더나 정보" :
             self.textBrowser.setPlainText("test")
