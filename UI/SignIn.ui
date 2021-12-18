@@ -47,9 +47,9 @@
    <widget class="QLabel" name="CIMS">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>270</x>
       <y>120</y>
-      <width>701</width>
+      <width>721</width>
       <height>61</height>
      </rect>
     </property>
@@ -83,7 +83,7 @@
      <number>-1</number>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="Email">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -112,7 +112,7 @@
      <string>Sign in</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="Password">
     <property name="geometry">
      <rect>
       <x>280</x>
