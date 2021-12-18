@@ -40,6 +40,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.quarantine_measures = dbfile.get_distancing()
         self.vaccine = dbfile.get_vaccine()
         self.coevent = dbfile.get_event()
+        self.Ip = dbfile.get_Infected_person()
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -111,6 +112,16 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
                     "카테고리 : " + self.coevent['Incheon'][i].category + '\n\n' +
                     "행사 이름 : " + self.coevent['Incheon'][i].name + '\n\n' +
                     "내용 : " + self.coevent['Incheon'][i].information + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
+        elif select == "확진자 수":
+            for i in self.Ip:
+                self.MainMenuList.addItem(
+                    "일자 : " + i + '\n\n' +
+                    "누적 확진자 수 : " + self.Ip[i].accumation + '\n\n' +
+                    "일일 확진자 수 : " + self.Ip[i].day + '\n\n' +
+                    "일일 사망 수 : " + self.Ip[i].death + '\n\n' +
+                    "완치 수 : " + self.Ip[i].complete + '\n\n' +
                     "-----------------------------------------------------------------------------------------------------------------------"
                 )
 

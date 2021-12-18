@@ -32,7 +32,12 @@ def get_distancing():
     return Qm.quarantine_Measures(COVID_dt['Distancing'])
 
 def get_Infected_person():
-    return Ip.Infected_person(COVID_dt['Infeted-person'])
+    ip = dict()
+    for i in COVID_dt['Infected-person']:
+        ip.update({
+            i : Ip.Infected_person(COVID_dt['Infected-person'][i])
+        })
+    return ip
 
 def get_news():
     return News.News(COVID_dt['News'])
