@@ -40,7 +40,10 @@ def get_Infected_person():
     return ip
 
 def get_news():
-    return News.News(COVID_dt['News'])
+    news = []
+    for i in range(len(COVID_dt['News'])):
+        news.append(News.News(COVID_dt['News'][i]))
+    return news
 
 def get_vaccine():
     vaccine =dict()

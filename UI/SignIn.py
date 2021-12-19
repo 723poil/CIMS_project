@@ -41,6 +41,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.vaccine = dbfile.get_vaccine()
         self.coevent = dbfile.get_event()
         self.Ip = dbfile.get_Infected_person()
+        self.news = dbfile.get_news()
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -65,6 +66,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.smallMenuList.addItem("자가 진단")
         self.smallMenuList.addItem("행동 수칙") 
         self.smallMenuList.addItem("방역 대책")
+        self.smallMenuList.addItem("코로나 관련 뉴스")
 
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
@@ -124,7 +126,17 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
                     "완치 수 : " + self.Ip[i].complete + '\n\n' +
                     "-----------------------------------------------------------------------------------------------------------------------"
                 )
-
+        elif select == "코로나 관련 뉴스":
+            for i in self.news:
+                self.MainMenuList.addItem(
+                    "제목 : " + i.title + '\n\n' +
+                    "기자 : " + i.repoter + '\n\n' +
+                    "일자 : " + i.date + '\n\n' +
+                    "매체 : " + i.media + '\n\n' +
+                    "내용 : " + i.content + '\n\n' +
+                    "출처 : " + i.source + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
 
     def ViewInfo(self) :
         myViewInformation.setup(self)

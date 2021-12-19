@@ -1,7 +1,8 @@
 
 class News:
     def __init__(self, News):
-        self.reporter = News["reporter"]
+        self.title = News['title']
+        self.repoter = News["repoter"]
         self.content = News["content"]
         self.date = News["date"]
         self.source = News["source"]
