@@ -157,13 +157,17 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
         self.smallMenuList.addItem("모더나")
-        self.smallMenuList.addItem("화이자")
         self.smallMenuList.itemClicked.connect(self.SetMainList)
 
     def CorronaInfoButtonFunction(self) : 
         self.MainMenuList.clear()
         self.smallMenuList.clear()
-        self.smallMenuList.addItem("코로나")
+        self.smallMenuList.addItem("정의")
+        self.smallMenuList.addItem("증상")
+        self.smallMenuList.addItem("검사 방법")
+        self.smallMenuList.addItem("자가 진단")
+        self.smallMenuList.addItem("행동 수칙") 
+        self.smallMenuList.addItem("방역 대책")
 
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
@@ -174,18 +178,55 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
         self.smallMenuList.addItem("확진자 수")
-        self.smallMenuList.addItem("확진자 상세정보")
 
     def SetMainList(self) :
         select = self.smallMenuList.currentItem().text()
         self.MainMenuList.clear()
 
         if select == "모더나" :
-            self.MainMenuList.addItem("모더나 정보")
-            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
-        elif select == "화이자" :
-            self.MainMenuList.addItem("화이자 정보")
-            self.MainMenuList.itemDoubleClicked.connect(self.ViewInfo)
+            self.MainMenuList.addItem(
+                "제조사 : " + self.vaccine['Moderna'].company + '\n\n' +
+                "예약 방법 : " + self.vaccine['Moderna'].how_apply + '\n\n' +
+                "필요 접종량 : " + self.vaccine['Moderna'].inoculation_capacity + '\n\n' +
+                "접종 간격 : " + self.vaccine['Moderna'].inoculation_gap + '\n\n' +
+                "접종자 수 : " + self.vaccine['Moderna'].inoculation_person_num + '\n\n' +
+                "접종률 : " + self.vaccine['Moderna'].inoculation_rate + '\n\n' +
+                "백신 이름 : " + self.vaccine['Moderna'].name + '\n\n' +
+                "예방 효과 : " + self.vaccine['Moderna'].preventive_effects + '\n\n' +
+                "필요 접종 횟수 : " + self.vaccine['Moderna'].required_inoculations + '\n\n' +
+                "부작용 사례 : " + self.vaccine['Moderna'].side_effect_ex + '\n\n'
+            )
+        elif select == "정의":
+            self.MainMenuList.addItem(self.corona.definition)
+        elif select == "증상":
+            self.MainMenuList.addItem(self.corona.symptom)
+        elif select == "검사 방법":
+            self.MainMenuList.addItem(self.corona.how_test)
+        elif select == "자가 진단":
+            self.MainMenuList.addItem(self.corona.self_test)
+        elif select == "행동 수칙":
+            self.MainMenuList.addItem(self.corona.action_tip)
+        elif select == "방역 대책":
+            self.MainMenuList.addItem("대구")
+        elif select == "인천광역시":
+            for i in range(0, len(self.coevent['Incheon'])):
+                self.MainMenuList.addItem(
+                    "지역 : " + self.coevent['Incheon'][i].area + '\n\n' +
+                    "카테고리 : " + self.coevent['Incheon'][i].category + '\n\n' +
+                    "행사 이름 : " + self.coevent['Incheon'][i].name + '\n\n' +
+                    "내용 : " + self.coevent['Incheon'][i].information + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
+        elif select == "확진자 수":
+            for i in self.Ip:
+                self.MainMenuList.addItem(
+                    "일자 : " + i + '\n\n' +
+                    "누적 확진자 수 : " + self.Ip[i].accumation + '\n\n' +
+                    "일일 확진자 수 : " + self.Ip[i].day + '\n\n' +
+                    "일일 사망 수 : " + self.Ip[i].death + '\n\n' +
+                    "완치 수 : " + self.Ip[i].complete + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
 
     def ViewInfo(self) :
         myViewInformation.setup(self)
