@@ -42,6 +42,7 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.coevent = dbfile.get_event()
         self.Ip = dbfile.get_Infected_person()
         self.news = dbfile.get_news()
+        self.qm = dbfile.get_distancing()
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -106,7 +107,10 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         elif select == "행동 수칙":
             self.MainMenuList.addItem(self.corona.action_tip)
         elif select == "방역 대책":
-            self.MainMenuList.addItem("대구")
+            self.MainMenuList.addItem("대구\n\n")
+            self.MainMenuList.addItem(self.qm.Daegu['restrictions'] + '\n\n' +
+            "-----------------------------------------------------------------------------------------------------------------------"
+            )
         elif select == "인천광역시":
             for i in range(0, len(self.coevent['Incheon'])):
                 self.MainMenuList.addItem(
