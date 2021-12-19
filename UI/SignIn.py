@@ -12,18 +12,18 @@ userid = ''
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-SignInWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/SignIn.ui")[0]
-SignUpWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/SignUp.ui")[0]
-UserMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/UserMenu.ui")[0]
-AdminMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/AdminMenu.ui")[0]
-TotalInfoWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/TotalInfoWindow.ui")[0]
-form_reportlist = uic.loadUiType("C:/CIMS_PROJECT/UI/Report_List.ui")[0]
-form_reportcheck = uic.loadUiType("C:/CIMS_PROJECT/UI/Reportcheck.ui")[0]
-form_report = uic.loadUiType("C:/CIMS_PROJECT/UI/Report.ui")[0]
-form_viewinformation = uic.loadUiType("C:/CIMS_PROJECT/UI/ViewInformation.ui")[0]
-form_impactedlist = uic.loadUiType("C:/CIMS_PROJECT/UI/Impacted_List.ui")[0]
-form_visitplacelist = uic.loadUiType("C:/CIMS_PROJECT/UI/VisitPlace_List.ui")[0]
-form_alarmlist = uic.loadUiType("C:/CIMS_PROJECT/UI/Alarm_List.ui")[0]
+SignInWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/SignIn.ui")[0]
+SignUpWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/SignUp.ui")[0]
+UserMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/UserMenu.ui")[0]
+AdminMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/AdminMenu.ui")[0]
+TotalInfoWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/TotalInfoWindow.ui")[0]
+form_reportlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Report_List.ui")[0]
+form_reportcheck = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Reportcheck.ui")[0]
+form_report = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Report.ui")[0]
+form_viewinformation = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/ViewInformation.ui")[0]
+form_impactedlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Impacted_List.ui")[0]
+form_visitplacelist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/VisitPlace_List.ui")[0]
+form_alarmlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Alarm_List.ui")[0]
 
 class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
@@ -341,6 +341,7 @@ class SignUpClass(QDialog, SignUpWindow) :
             'Email' : email,
             'Password' : password,
             'Address' : address,
+            'inlist_noti' : 0
         }
         if login_function.sign_up(registration_info) == 1:
             self.close()

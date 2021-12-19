@@ -15,7 +15,7 @@ import User_package.notification_list as nl
 
 import firebase_application
 
-firebase_application.start()
+# firebase_application.start()
 
 COVID_dir = db.reference('COVID-package/')
 PLACE_dir = db.reference('Place-package/')
