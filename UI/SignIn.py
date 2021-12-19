@@ -161,6 +161,14 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.Infected_personInfo.clicked.connect(self.Infected_personInfoButtonFunction)
         self.alarmbutton.setText("설정")
 
+        self.corona = dbfile.get_corona()
+        self.quarantine_measures = dbfile.get_distancing()
+        self.vaccine = dbfile.get_vaccine()
+        self.coevent = dbfile.get_event()
+        self.Ip = dbfile.get_Infected_person()
+        self.news = dbfile.get_news()
+        self.qm = dbfile.get_distancing()
+
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
         widget.setFixedWidth(800)

@@ -1,4 +1,4 @@
-import Check_notification as cn
+import test_folder.Check_notification as cn
 import time
 
 cn.thread_run()
