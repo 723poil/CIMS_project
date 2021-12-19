@@ -2,6 +2,8 @@
 + COVID19 information management system (CIMS)
 
 ---------------------------------------
+## 사용 언어
+### Python 3.9.0
 
 ## member
  + 박지운
