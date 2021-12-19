@@ -82,8 +82,10 @@ def get_vpl(userid):
 def get_rl():
     return Rl.Report_list()
 
-def get_nl():
-    pass
+def get_nl(userid):
+    noti = nl.noti()
+    noti.set_noti_list(userid)
+    return noti
 
 # u = get_vpl('leetkdguq73@naver.com')
 # print(u.user_address)
@@ -96,3 +98,9 @@ def get_nl():
 #     print(i.content)
 #     print(i.date)
 #     print(i.user)
+
+# u = get_nl('leetkdguq73@naver.com')
+# for i in u.notification_list:
+#     print(i['title'])
+#     print(i['content'])
+#     print(i['date'])
