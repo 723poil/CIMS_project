@@ -62,5 +62,9 @@
 ## 사용한 API
 
 ### firebase
+    #firebase install
+    python -m pip install firebase-admin
 
 ### PyQt5 (python gui)
+    #PyQt5 install
+    python -m pip install PyQt5
