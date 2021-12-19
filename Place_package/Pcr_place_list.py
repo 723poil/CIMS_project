@@ -17,7 +17,7 @@ class pcr_list:
         ua = user_address.split()
 
         for i in set_area:
-            if i == ua:
+            if i == ua[0]:
                 set_comp = True
                 break
         

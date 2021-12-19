@@ -8,10 +8,10 @@ characters = "@."
 
 class report:
     
-    def __init__(self, content, date, user):
-        self.content = content
-        self.date = date
-        self.user = user
+    def __init__(self, report):
+        self.content = report['content']
+        self.date = report['date']
+        self.user = report['user']
 
     def reportit(self):
         dbid = ''.join(x for x in self.user if x not in characters)
@@ -20,7 +20,4 @@ class report:
             'content' : self.content,
             'date' : self.date,
             'user' : self.user
-            })
-r = report('bla', 'bla', 'asdnavercom')
-
-r.reportit()
+        })

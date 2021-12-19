@@ -8,14 +8,14 @@ import Covid_package.Infected_person as Ip
 import Covid_package.News as News
 import Covid_package.quarantine_Measures as Qm
 import Covid_package.Vaccine as Vaccine
-import Place_package.Covid_pcr_place as cpp
-import Place_package.Infected_person_visit_place as Ipvp
 import Place_package.Pcr_place_list as Ppl
 import Place_package.visit_place_list as Vpl
 import Report_package.Report_list as Rl
 import User_package.notification_list as nl
 
 import firebase_application
+
+firebase_application.start()
 
 COVID_dir = db.reference('COVID-package/')
 PLACE_dir = db.reference('Place-package/')
@@ -61,3 +61,38 @@ def get_event():
                 i : a
             })
     return event
+
+def get_ppl(userid):
+    characters = '@.'
+    userid_dbref = ''.join(x for x in userid if x not in characters)
+    user_dir = db.reference('User-package/Users/' + userid_dbref)
+    user_dt = user_dir.get()
+    user_address = user_dt['address']
+    return Ppl.pcr_list(user_address)
+
+
+def get_vpl(userid):
+    characters = '@.'
+    userid_dbref = ''.join(x for x in userid if x not in characters)
+    user_dir = db.reference('User-package/Users/' + userid_dbref)
+    user_dt = user_dir.get()
+    user_address = user_dt['address']
+    return Vpl.visit_list(user_address)
+
+def get_rl():
+    return Rl.Report_list()
+
+def get_nl():
+    pass
+
+# u = get_vpl('leetkdguq73@naver.com')
+# print(u.user_address)
+# for i in u.vl:
+#     print(i.address)
+#     print(i.visit_time)
+
+# u = get_rl()
+# for i in u.report_list:
+#     print(i.content)
+#     print(i.date)
+#     print(i.user)

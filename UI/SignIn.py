@@ -303,7 +303,7 @@ class SignInClass(QMainWindow, SignInWindow) :
             'Email' : email,
             'Password' : password,
         }
-
+        global userid
         userid = email
 
         # 로그인 기능
