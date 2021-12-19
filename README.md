@@ -71,3 +71,9 @@
     #PyQt5 install
     
     python -m pip install PyQt5
+
+
+## 사용방법
+> 경로설정
+>> C:/CIMS_PROJECT/ 에 파일 저장
+>> C:/key/ 에 지급된 비공개 키 저장
