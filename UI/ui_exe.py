@@ -13,18 +13,18 @@ userid = ''
 
 #UI파일 연결
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
-SignInWindow = uic.loadUiType("ui_folder/SignIn.ui")[0]
-SignUpWindow = uic.loadUiType("ui_folder/SignUp.ui")[0]
-UserMenuWindow = uic.loadUiType("ui_folder/UserMenu.ui")[0]
-AdminMenuWindow = uic.loadUiType("ui_folder/AdminMenu.ui")[0]
-TotalInfoWindow = uic.loadUiType("ui_folder/TotalInfoWindow.ui")[0]
-form_reportlist = uic.loadUiType("ui_folder/Report_List.ui")[0]
-form_reportcheck = uic.loadUiType("ui_folder/Reportcheck.ui")[0]
-form_report = uic.loadUiType("ui_folder/Report.ui")[0]
-form_viewinformation = uic.loadUiType("ui_folder/ViewInformation.ui")[0]
-form_impactedlist = uic.loadUiType("ui_folder/Impacted_List.ui")[0]
-form_visitplacelist = uic.loadUiType("ui_folder/VisitPlace_List.ui")[0]
-form_alarmlist = uic.loadUiType("ui_folder/Alarm_List.ui")[0]
+SignInWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/SignIn.ui")[0]
+SignUpWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/SignUp.ui")[0]
+UserMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/UserMenu.ui")[0]
+AdminMenuWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/AdminMenu.ui")[0]
+TotalInfoWindow = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/TotalInfoWindow.ui")[0]
+form_reportlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Report_List.ui")[0]
+form_reportcheck = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Reportcheck.ui")[0]
+form_report = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Report.ui")[0]
+form_viewinformation = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/ViewInformation.ui")[0]
+form_impactedlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Impacted_List.ui")[0]
+form_visitplacelist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/VisitPlace_List.ui")[0]
+form_alarmlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Alarm_List.ui")[0]
 
 class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
