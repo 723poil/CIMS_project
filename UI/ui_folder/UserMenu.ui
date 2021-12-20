@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Search Impacted Place</string>
+     <string>Search Check Place</string>
     </property>
    </widget>
    <widget class="Line" name="line">
