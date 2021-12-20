@@ -92,6 +92,19 @@
      <string>Report List</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="spn">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>260</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send Public Notification</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

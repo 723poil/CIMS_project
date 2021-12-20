@@ -313,7 +313,12 @@ class AdminMenuClass(QMainWindow, AdminMenuWindow) :
 
         self.ReportList.clicked.connect(self.ReportListFunction)
         self.ModificationBoard.clicked.connect(self.ModificationBoardFunction)
+        self.spn.clicked.connect(self.spnFunction)
         # 버튼 클릭 시 함수
+
+    def spnFunction(self):
+        mySendNoti.show()
+    
     def ReportListFunction(self) :
         myReportList.show()
 
@@ -502,6 +507,41 @@ class ReportList(QDialog, form_reportlist) :
         
         myReportCheck.show()
 
+class Send_noti(QDialog, form_reportcheck) :
+    def __init__(self) :
+        super().__init__()
+        self.setupUi(self)  
+        
+        self.ReportChechkLabel.setText('Send Notification')
+        self.CancleButton.clicked.connect(self.CancleFunction)
+        self.ReportButton_2.clicked.connect(self.ReportFunction)
+        
+        #cancle 클릭 시 실행 함수
+    def CancleFunction(self) :
+        self.close()
+    
+    def ReportFunction(self) :
+        title = self.title.toPlainText()
+        date = self.date.toPlainText()
+        content = self.content.toPlainText()
+
+        dir = db.reference('User-package/All-notifications/')
+        dt = dir.get()
+        noti_count = int(dt['noti_count'])
+        noti_count += 1
+        dt['noti_count'] = str(noti_count)
+        dd = dict()
+        for i in dt:
+            dd.update({i : dt[i]})
+        dd.update({str(noti_count) : {
+            'content' : content,
+            'date' : date,
+            'title' : title,
+        }})
+        dir.update(dd)
+        QMessageBox.about(self,'전송완료', '정상적으로 전송하였습니다.')
+        self.close()
+
 class ReportCheck(QDialog, form_reportcheck) :
     def __init__(self) :
         super().__init__()
@@ -542,8 +582,6 @@ class AlarmList(QDialog, form_alarmlist) :
         super().__init__()
         self.setupUi(self)  
         
-        #리폿리스트 안에 항목을 더블 클릭시 
-        self.listWidget.itemDoubleClicked.connect(self.ReportCheckOpen)
 
     def additem(self):
         for i in self.nl.notification_list:
@@ -555,8 +593,6 @@ class AlarmList(QDialog, form_alarmlist) :
             )
 
         #더블 클릭 했을 때 함수
-    def ReportCheckOpen(self):
-        myReportCheck.show()
 
     def set_noti(self, noti):
         self.nl = noti
@@ -581,6 +617,7 @@ if __name__ == "__main__" :
     myReportList = ReportList()
     myReportCheck = ReportCheck()
     myalarm = AlarmList()
+    mySendNoti= Send_noti()
 
     #화면 전환용 위젯추가
     widget.addWidget(signinwindow)

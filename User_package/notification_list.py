@@ -58,7 +58,7 @@ class noti:
         user_noti = db.reference('User-package/Users/' + db_user_id).get()
         user_noti_count = user_noti['inlist_noti']
 
-        if public_noti['noti_count'] != user_noti_count:
+        if int(public_noti['noti_count']) != user_noti_count:
             # 추가 후 user_noti_count 변경
             while public_noti['noti_count'] != user_noti_count:
                 self.notification_list.append(public_noti[str(user_noti_count+1)])
