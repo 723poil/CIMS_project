@@ -11,7 +11,7 @@ import Covid_package.Vaccine as Vaccine
 import Place_package.Pcr_place_list as Ppl
 import Place_package.visit_place_list as Vpl
 import Report_package.Report_list as Rl
-import User_package.notification_list as nl
+import Notification_package.notification_list as nl
 
 import firebase_application
 

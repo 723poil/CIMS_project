@@ -320,6 +320,7 @@ class AdminMenuClass(QMainWindow, AdminMenuWindow) :
         mySendNoti.show()
     
     def ReportListFunction(self) :
+        myReportList.reset_report()
         myReportList.show()
 
     def ModificationBoardFunction(self):
@@ -496,6 +497,17 @@ class ReportList(QDialog, form_reportlist) :
                 "내용 : " + i.content + '\n\n' + 
                 "-----------------------------------------------------------------------------------------------------------------------"
                 )
+    def reset_report(self):
+        self.listWidget.clear()
+        self.rl = dbfile.get_rl()
+        for i in self.rl.report_list:
+            self.listWidget.addItem(
+                "유저 : " + i.user + '\n\n' +
+                "날짜 : " + i.date + '\n\n' +
+                "내용 : " + i.content + '\n\n' + 
+                "-----------------------------------------------------------------------------------------------------------------------"
+                )
+
     def send_userid(self):
         return self.rl.report_list[self.listWidget.currentRow()].user
         #더블 클릭 했을 때 함수
