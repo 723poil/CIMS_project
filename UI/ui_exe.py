@@ -6,7 +6,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtWidgets
-import db as dbfile
+import get_function as dbfile
 from firebase_admin import db
 
 userid = ''
@@ -508,15 +508,14 @@ class ReportList(QDialog, form_reportlist) :
                 "-----------------------------------------------------------------------------------------------------------------------"
                 )
 
-    def send_userid(self):
-        return self.rl.report_list[self.listWidget.currentRow()].user
-        #더블 클릭 했을 때 함수
+    # def send_userid(self):
+    #     return self.rl.report_list[self.listWidget.currentRow()].user
     
-    def send_date(self):
-        return self.rl.report_list[self.listWidget.currentRow()].date
+    # def send_date(self):
+    #     return self.rl.report_list[self.listWidget.currentRow()].date
 
     def ReportCheckOpen(self) :
-        
+        myReportCheck.set_if(self.listWidget.currentRow())
         myReportCheck.show()
 
 class Send_noti(QDialog, form_reportcheck) :
@@ -558,19 +557,24 @@ class ReportCheck(QDialog, form_reportcheck) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)  
-        
         # 신고체크 기능의 버튼 함수
-        self.userid = myReportList.send_userid()
-        self.dated = myReportList.send_date()
-        self.userid_label.setText(self.userid)
+        
         self.CancleButton.clicked.connect(self.CancleFunction)
         self.ReportButton_2.clicked.connect(self.ReportFunction)
         
         #cancle 클릭 시 실행 함수
+
+    def set_if(self, index):
+        self.userid = myReportList.rl.report_list[index].user
+        self.dated = myReportList.rl.report_list[index].date
+        self.userid_label.setText(self.userid)
+
     def CancleFunction(self) :
         self.close()
     
     def ReportFunction(self) :
+        
+        
         title = self.title.toPlainText()
         date = self.date.toPlainText()
         content = self.content.toPlainText()
