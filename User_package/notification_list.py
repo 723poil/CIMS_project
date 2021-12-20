@@ -13,13 +13,15 @@ class noti:
         # 1. 개인 알림 확인
         user_noti = db.reference('User-package/Users/' + db_user_id + '/user_notifications/').get()
 
-        for i in user_noti:
-            if user_noti[i]['read'] == "false":
-                self.notification_list.append(user_noti[i])
-                dir = db.reference('User-package/Users/' + db_user_id + '/user_notifications/' + i)
-                user_noti[i]['isinlist'] = 'yes'
-                dir.update(user_noti[i])
-                print('개인 알림 추가')
+        if user_noti != None:
+
+            for i in user_noti:
+                if user_noti[i]['read'] == "false":
+                    self.notification_list.append(user_noti[i])
+                    dir = db.reference('User-package/Users/' + db_user_id + '/user_notifications/' + i)
+                    user_noti[i]['isinlist'] = 'yes'
+                    dir.update(user_noti[i])
+                    print('개인 알림 추가')
                 
         # 2. 공통 알림 확인
         public_noti = db.reference('User-package/All-notifications/').get()
@@ -45,13 +47,15 @@ class noti:
         # 1. 개인 알림 확인
         user_noti = db.reference('User-package/Users/' + db_user_id + '/user_notifications/').get()
 
-        for i in user_noti:
-            if user_noti[i]['isinlist'] == 'no':
-                self.notification_list.append(user_noti[i])
-                dir = db.reference('User-package/Users/' + db_user_id + '/user_notifications/' + i)
-                user_noti[i]['isinlist'] = 'yes'
-                dir.update(user_noti[i])
-                print('개인 알림 추가')
+        if user_noti != None:
+
+            for i in user_noti:
+                if user_noti[i]['isinlist'] == 'no':
+                    self.notification_list.append(user_noti[i])
+                    dir = db.reference('User-package/Users/' + db_user_id + '/user_notifications/' + i)
+                    user_noti[i]['isinlist'] = 'yes'
+                    dir.update(user_noti[i])
+                    print('개인 알림 추가')
                 
         # 2. 공통 알림 확인
         public_noti = db.reference('User-package/All-notifications/').get()

@@ -55,7 +55,8 @@ def sign_up(registration_info): # 클래스 다이어그램에 나와있는 정�
     user_data = {
         'Email' : registration_info['Email'],
         'Password' : registration_info['Password'],
-        'Address' : registration_info['Address']
+        'Address' : registration_info['Address'],
+        'isinlist' : 0
     }
 
     db_user_id = ''.join(x for x in registration_info['Email'] if x not in characters)
