@@ -67,7 +67,7 @@ def get_ppl(userid):
     userid_dbref = ''.join(x for x in userid if x not in characters)
     user_dir = db.reference('User-package/Users/' + userid_dbref)
     user_dt = user_dir.get()
-    user_address = user_dt['address']
+    user_address = user_dt['Address']
     return Ppl.pcr_list(user_address)
 
 
@@ -76,7 +76,7 @@ def get_vpl(userid):
     userid_dbref = ''.join(x for x in userid if x not in characters)
     user_dir = db.reference('User-package/Users/' + userid_dbref)
     user_dt = user_dir.get()
-    user_address = user_dt['address']
+    user_address = user_dt['Address']
     return Vpl.visit_list(user_address)
 
 def get_rl():

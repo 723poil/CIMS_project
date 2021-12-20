@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5 import QtWidgets
 import db as dbfile
+from firebase_admin import db
 
 userid = ''
 
@@ -28,6 +29,7 @@ form_alarmlist = uic.loadUiType("C:/CIMS_PROJECT/UI/ui_folder/Alarm_List.ui")[0]
 class TotalInfoClass(QMainWindow, TotalInfoWindow) :
     def __init__(self) :
         super().__init__()
+        
         self.setupUi(self)
         self.Back.clicked.connect(self.ClickedBackButton)
         self.alarmbutton.clicked.connect(self.AlarmButtonFunction)
@@ -35,6 +37,8 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.CorronaInfo.clicked.connect(self.CorronaInfoButtonFunction)
         self.EventInfo.clicked.connect(self.EventInfoButtonFunction)
         self.Infected_personInfo.clicked.connect(self.Infected_personInfoButtonFunction)
+        self.report_button.clicked.connect(self.REPORT_BUTTON)
+        self.smallMenuList.itemClicked.connect(self.SetMainList)
 
         self.corona = dbfile.get_corona()
         self.quarantine_measures = dbfile.get_distancing()
@@ -43,6 +47,9 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.Ip = dbfile.get_Infected_person()
         self.news = dbfile.get_news()
         self.qm = dbfile.get_distancing()
+
+    def REPORT_BUTTON(self):
+        myReport.show()
 
     def ClickedBackButton(self):    
         widget.setFixedHeight(615)
@@ -56,7 +63,6 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.MainMenuList.clear()
         self.smallMenuList.clear()
         self.smallMenuList.addItem("모더나")
-        self.smallMenuList.itemClicked.connect(self.SetMainList)
 
     def CorronaInfoButtonFunction(self) : 
         self.MainMenuList.clear()
@@ -107,8 +113,8 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         elif select == "행동 수칙":
             self.MainMenuList.addItem(self.corona.action_tip)
         elif select == "방역 대책":
-            self.MainMenuList.addItem("대구\n\n")
-            self.MainMenuList.addItem(self.qm.Daegu['restrictions'] + '\n\n' +
+            self.MainMenuList.addItem("대구\n\n" +
+            self.qm.Daegu['restrictions'] + '\n\n' +
             "-----------------------------------------------------------------------------------------------------------------------"
             )
         elif select == "인천광역시":
@@ -192,6 +198,7 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.smallMenuList.addItem("자가 진단")
         self.smallMenuList.addItem("행동 수칙") 
         self.smallMenuList.addItem("방역 대책")
+        self.smallMenuList.addItem("코로나 관련 뉴스")
 
     def EventInfoButtonFunction(self) :
         self.MainMenuList.clear()
@@ -231,7 +238,10 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
         elif select == "행동 수칙":
             self.MainMenuList.addItem(self.corona.action_tip)
         elif select == "방역 대책":
-            self.MainMenuList.addItem("대구")
+            self.MainMenuList.addItem("대구\n\n" +
+            self.qm.Daegu['restrictions'] + '\n\n' +
+            "-----------------------------------------------------------------------------------------------------------------------"
+            )
         elif select == "인천광역시":
             for i in range(0, len(self.coevent['Incheon'])):
                 self.MainMenuList.addItem(
@@ -249,6 +259,17 @@ class AdminTotalInfoClass(QMainWindow, TotalInfoWindow) :
                     "일일 확진자 수 : " + self.Ip[i].day + '\n\n' +
                     "일일 사망 수 : " + self.Ip[i].death + '\n\n' +
                     "완치 수 : " + self.Ip[i].complete + '\n\n' +
+                    "-----------------------------------------------------------------------------------------------------------------------"
+                )
+        elif select == "코로나 관련 뉴스":
+            for i in self.news:
+                self.MainMenuList.addItem(
+                    "제목 : " + i.title + '\n\n' +
+                    "기자 : " + i.repoter + '\n\n' +
+                    "일자 : " + i.date + '\n\n' +
+                    "매체 : " + i.media + '\n\n' +
+                    "내용 : " + i.content + '\n\n' +
+                    "출처 : " + i.source + '\n\n' +
                     "-----------------------------------------------------------------------------------------------------------------------"
                 )
 
@@ -319,6 +340,8 @@ class SignInClass(QMainWindow, SignInWindow) :
         if(login == -1):
             QMessageBox.about(self,'SignIn Fail','아이디나 비밀번호가 틀렸습니다.')
         elif(login == 2): # 회원로그인
+            myVisitPlaceList.set_vpl(userid)
+            myImpactedList.set_ppl(userid)
             widget.setFixedHeight(615)
             widget.setFixedWidth(800)
             widget.setCurrentIndex(widget.currentIndex()+1)
@@ -390,31 +413,54 @@ class Report(QDialog, form_report) :
         
         # 신고 기능의 버튼 함수
         self.CancleButton.clicked.connect(self.CancleFunction)
+        self.ReportButton_2.clicked.connect(self.ReportFunction)
         
         #cancle 클릭 시 실행 함수
     def CancleFunction(self) :
+        self.close()
+    
+    def ReportFunction(self) :
+        date = self.date.toPlainText()
+        content = self.content.toPlainText()
+
+        dir = db.reference('Report-package/report/')
+        dir.push({
+            'content' : content,
+            'date' : date,
+            'user' : userid
+        })
+        QMessageBox.about(self,'전송완료', '정상적으로 전송하였습니다.')
         self.close()
         
 class VisitPlaceList(QDialog, form_visitplacelist) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)        
-
-        # 검색 버튼 함수
-        self.SearchButton.clicked.connect(self.SearchButtonFunction)
         
-        #search 버튼 클릭 시 작동 함수
-    def SearchButtonFunction(self) :
-        self.close()
-        myVisitPlaceList.show()
+    def set_vpl(self, userid):
+        self.vpl = dbfile.get_vpl(userid)
+
+        for i in self.vpl.vl:
+            self.listWidget.addItem(
+                '주소 : ' + i.address + '\n\n' +
+                '방문 시간 : ' + i.visit_time + '\n\n' +
+                "-----------------------------------------------------------------------------------------------------------------------"
+            )
         
 class ImpactedList(QDialog, form_impactedlist) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)  
-        
-        # 검색 버튼 함수
-        self.SearchButton.clicked.connect(self.SearchButtonFunction)
+
+    def set_ppl(self, userid):
+        self.ppl = dbfile.get_ppl(userid)
+
+        for i in self.ppl.pl:
+            self.listWidget.addItem(
+                '주소 : ' + i.address + '\n\n' +
+                '검사 시간 : ' + i.time + '\n\n' +
+                "-----------------------------------------------------------------------------------------------------------------------"
+            )       
         
         #search 버튼 클릭 시 작동 함수
     def SearchButtonFunction(self) :
@@ -429,8 +475,23 @@ class ReportList(QDialog, form_reportlist) :
         #리폿리스트 안에 항목을 더블 클릭시 
         self.listWidget.itemDoubleClicked.connect(self.ReportCheckOpen)
 
+        self.rl = dbfile.get_rl()
+        for i in self.rl.report_list:
+            self.listWidget.addItem(
+                "유저 : " + i.user + '\n\n' +
+                "날짜 : " + i.date + '\n\n' +
+                "내용 : " + i.content + '\n\n' + 
+                "-----------------------------------------------------------------------------------------------------------------------"
+                )
+    def send_userid(self):
+        return self.rl.report_list[self.listWidget.currentRow()].user
         #더블 클릭 했을 때 함수
+    
+    def send_date(self):
+        return self.rl.report_list[self.listWidget.currentRow()].date
+
     def ReportCheckOpen(self) :
+        
         myReportCheck.show()
 
 class ReportCheck(QDialog, form_reportcheck) :
@@ -439,10 +500,33 @@ class ReportCheck(QDialog, form_reportcheck) :
         self.setupUi(self)  
         
         # 신고체크 기능의 버튼 함수
+        self.userid = myReportList.send_userid()
+        self.dated = myReportList.send_date()
+        self.userid_label.setText(self.userid)
         self.CancleButton.clicked.connect(self.CancleFunction)
+        self.ReportButton_2.clicked.connect(self.ReportFunction)
         
         #cancle 클릭 시 실행 함수
     def CancleFunction(self) :
+        self.close()
+    
+    def ReportFunction(self) :
+        title = self.title.toPlainText()
+        date = self.date.toPlainText()
+        content = self.content.toPlainText()
+
+        characters = '@.'
+        userid_d = ''.join(x for x in self.userid if x not in characters)
+
+        dir = db.reference('User-package/Users/' + userid_d + '/user_notifications')
+        dir.push({
+            'content' : content + '(' + self.dated + ')',
+            'date' : date,
+            'title' : title,
+            'isinlist' : 'no',
+            'read' : 'false'
+        })
+        QMessageBox.about(self,'전송완료', '정상적으로 전송하였습니다.')
         self.close()
 
 class AlarmList(QDialog, form_alarmlist) :

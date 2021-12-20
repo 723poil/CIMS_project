@@ -13,43 +13,11 @@
   <property name="windowTitle">
    <string>Report</string>
   </property>
-  <widget class="QLineEdit" name="TitleLineEdit">
+  <widget class="QTextEdit" name="content">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>160</y>
-     <width>811</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>160</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Title :</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="ContentsTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>250</y>
+     <x>160</x>
+     <y>210</y>
      <width>811</width>
      <height>381</height>
     </rect>
@@ -58,7 +26,7 @@
   <widget class="QPushButton" name="CancleButton">
    <property name="geometry">
     <rect>
-     <x>700</x>
+     <x>720</x>
      <y>640</y>
      <width>121</width>
      <height>51</height>
@@ -78,8 +46,8 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>250</y>
-     <width>121</width>
+     <y>210</y>
+     <width>141</width>
      <height>31</height>
     </rect>
    </property>
@@ -99,7 +67,7 @@
   <widget class="QPushButton" name="ReportButton_2">
    <property name="geometry">
     <rect>
-     <x>830</x>
+     <x>850</x>
      <y>640</y>
      <width>121</width>
      <height>51</height>
@@ -120,7 +88,7 @@
     <rect>
      <x>30</x>
      <y>50</y>
-     <width>101</width>
+     <width>151</width>
      <height>51</height>
     </rect>
    </property>
@@ -132,6 +100,38 @@
    </property>
    <property name="text">
     <string>Report</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>160</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Date :</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="date">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>160</y>
+     <width>811</width>
+     <height>41</height>
+    </rect>
    </property>
   </widget>
  </widget>
