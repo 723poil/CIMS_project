@@ -48,6 +48,9 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         self.news = dbfile.get_news()
         self.qm = dbfile.get_distancing()
 
+    def set_nl(self, userid):
+        self.nl = dbfile.get_nl(userid)
+
     def REPORT_BUTTON(self):
         myReport.show()
 
@@ -57,6 +60,10 @@ class TotalInfoClass(QMainWindow, TotalInfoWindow) :
         widget.setCurrentIndex(widget.currentIndex()-2)
 
     def AlarmButtonFunction(self) :
+        # check
+        self.nl.check_noti(userid)
+        myalarm.set_noti(self.nl)
+        myalarm.additem()
         myalarm.show()
         
     def VaccineInfoButtonFunction(self) :
@@ -289,6 +296,7 @@ class UserMenuClass(QMainWindow, UserMenuWindow) :
         self.SearchImpactedPlace.clicked.connect(self.ClickedSearchImpactedPlaceButton)
 
     def ClickedDisplayInfoButton(self):
+        totalInfoWindow.set_nl(userid)
         widget.setFixedHeight(914)
         widget.setFixedWidth(964)
         widget.setCurrentIndex(widget.currentIndex()+2)
@@ -537,9 +545,21 @@ class AlarmList(QDialog, form_alarmlist) :
         #리폿리스트 안에 항목을 더블 클릭시 
         self.listWidget.itemDoubleClicked.connect(self.ReportCheckOpen)
 
+    def additem(self):
+        for i in self.nl.notification_list:
+            self.listWidget.addItem(
+                "title : " + i['title'] + '\n\n' +
+                "date : " + i['date'] + '\n\n' +
+                "content : " + i['content'] + '\n\n' +
+                "-----------------------------------------------------------------------------------------------------------------------"
+            )
+
         #더블 클릭 했을 때 함수
-    def ReportCheckOpen(self) :
-        myReportCheck.show()        
+    def ReportCheckOpen(self):
+        myReportCheck.show()
+
+    def set_noti(self, noti):
+        self.nl = noti
 
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
