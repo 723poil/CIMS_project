@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminMenu</class>
+ <widget class="QMainWindow" name="AdminMenu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Menu</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="ModificationBoard">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>360</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modification Board</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>40</y>
+      <width>20</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>530</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>40</y>
+      <width>20</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>30</y>
+      <width>191</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ReportList">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>160</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Report List</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="spn">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>260</y>
+      <width>171</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Send Public Notification</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
